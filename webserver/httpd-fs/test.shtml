@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>Team 3 Rover Simulation</title>
+  </head>
+  <BODY onLoad="window.setTimeout(&quot;location.href='test.shtml'&quot;,2000)">
+<font face="arial">
+<a href="test.shtml">Refresh</a> <b>|</b> 
+<br><p>
+<hr>
+<b>Rover Simulation Course</b><br>
+
+<form name="aForm" action="/test.shtml" method="get">
+
+<p>
+%! test-io
+</form>
+<br><p>
+</font>
+<canvas id="myCanvas" width="400" height="300" style="border:1px solid #c3c3c3;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.moveTo(0,250);
+%! stop-io
+ctx.stroke();
+</script>
+</body>
+</html>
+
