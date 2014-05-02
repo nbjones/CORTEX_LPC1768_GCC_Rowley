@@ -305,7 +305,10 @@ static unsigned short generate_test_state( void *arg )
 }
 
 
-
+int north = 0;
+int south = 0;
+int east = 1;
+int west = 0; 
 static unsigned short generate_stop_state( void *arg )
 {
 
@@ -321,6 +324,8 @@ static unsigned short generate_stop_state( void *arg )
 
 	vGetMapData();
 	//sprintf(cCountBuf, "<p><br>FlagLeft = %d<p><br><p><br>FlagRight = %d<p><br><p><br>FlagStraight = %d<p><br>", flagLeft, flagRight, flagStraight);
+	
+	if (east == 1){
 	if (flagStraight==1){
 	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
 	xValue += 10;
@@ -329,10 +334,15 @@ static unsigned short generate_stop_state( void *arg )
 	if (flagLeft==1){
 	yValue -= 10;
 	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	east = 0;
+	north =1;
 	}
 	if (flagRight==1){
 	yValue += 10;
 	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	east = 0;
+	south = 1;
+	}
 	}
 	
 	//sprintf(cCountBuf, "<p><br>Movement Data = %d<p><br>", dataPtrSensor[1]);
