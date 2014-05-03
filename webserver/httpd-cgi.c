@@ -216,7 +216,7 @@ extern char *pcGetTaskStatusMessage( void );
 static char cCountBuf[ 12800 ];
 long lRefreshCount = 0;
 long xValue = 10;
-long yValue = 250;
+long yValue = 350;
 static unsigned short
 generate_rtos_stats(void *arg)
 {
@@ -281,12 +281,12 @@ static unsigned short generate_test_state( void *arg )
 
 
 	sprintf( uip_appdata,
-		"<input type=\"submit\" name=\"startrun\" value=\"START\" %s><p><p><p><br><input type=\"submit\" name=\"startrun\" value=\"STOP\" %s><p><p><p><br>", buf, buf );
+		"<input type=\"submit\" name=\"startrun\" value=\"START\" %s><input type=\"submit\" name=\"startrun\" value=\"STOP\" %s>", buf, buf );
 	  
-	
+	 sprintf(cCountBuf, "<br>FlagLeft = %d<br>", flagLeft);
 
 	//<input type="submit" name = "startrun" value="Start">
-	//strcat( uip_appdata, cCountBuf );
+	strcat( uip_appdata, cCountBuf );
 
 	return strlen( uip_appdata );
 	  /*
@@ -303,7 +303,10 @@ static unsigned short generate_test_state( void *arg )
 	return strlen( uip_appdata );
 	   */
 }
-
+int north = 0;
+int south = 0;
+int east = 1;
+int west = 0;
 
 
 static unsigned short generate_stop_state( void *arg )
@@ -320,21 +323,93 @@ static unsigned short generate_stop_state( void *arg )
 	
 
 	vGetMapData();
+	//COMMENT OUT BELOW LINE
+	//sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	xValue += 10;
 	//sprintf(cCountBuf, "<p><br>FlagLeft = %d<p><br><p><br>FlagRight = %d<p><br><p><br>FlagStraight = %d<p><br>", flagLeft, flagRight, flagStraight);
+	if (east==1){
 	if (flagStraight==1){
 	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
 	xValue += 10;
 
 	}
-	if (flagLeft==1){
+	else if (flagLeft==1){
 	yValue -= 10;
 	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	east = 0;
+	north = 1;
 	}
-	if (flagRight==1){
+	else if (flagRight==1){
 	yValue += 10;
 	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	east = 0;
+	south = 1;
+	}
+	}
+
+
+	else if (north==1){
+	if (flagStraight==1){
+	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	yValue -= 10;
+
+	}
+	else if (flagLeft==1){
+	xValue -= 10;
+	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	north = 0;
+	west = 1;
+	}
+	else if (flagRight==1){
+	xValue += 10;
+	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	north = 0;
+	east = 1;
+	}
+	}
+
+
+	else if (west==1){
+	if (flagStraight==1){
+	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	xValue -= 10;
+
+	}
+	else if (flagLeft==1){
+	yValue += 10;
+	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	west = 0;
+	south = 1;
+	}
+	else if (flagRight==1){
+	yValue -= 10;
+	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	west = 0;
+	north = 1;
+	}
 	}
 	
+
+
+	else if (south==1){
+	if (flagStraight==1){
+	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	yValue += 10;
+
+	}
+	else if (flagLeft==1){
+	xValue += 10;
+	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	south = 0;
+	east = 1;
+	}
+	else if (flagRight==1){
+	xValue -= 10;
+	sprintf( cCountBuf, "ctx.lineTo(%d,%d);\n", (int) xValue, (int) yValue);
+	south = 0;
+	west = 1;
+	}
+	}
 	//sprintf(cCountBuf, "<p><br>Movement Data = %d<p><br>", dataPtrSensor[1]);
 	//sprintf(cCountBuf, "<p><br>FlagLeft = %d<p><br><p><br>FlagRight = %d<p><br><p><br>FlagStraight = %d<p><br>", flagLeft, flagRight, flagStraight);
 
