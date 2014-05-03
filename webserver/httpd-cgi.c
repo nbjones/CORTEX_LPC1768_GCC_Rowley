@@ -264,6 +264,8 @@ extern long lParTestGetLEDState(void);
 //extern dataPtrSensor;
 //char buf[2000];
 char *buf;
+long timer;
+long value;
 static unsigned short generate_test_state( void *arg )
 {
 
@@ -281,9 +283,28 @@ static unsigned short generate_test_state( void *arg )
 
 
 	sprintf( uip_appdata,
-		"<input type=\"submit\" name=\"startrun\" value=\"START\" %s><input type=\"submit\" name=\"startrun\" value=\"STOP\" %s>", buf, buf );
+		"<input type=\"submit\" style=\"background-color:#458b00; color: #ffffff;\" name=\"startrun\" value=\"START\" %s><input type=\"submit\" style=\"background-color:#cc0000; color: #ffffff;\" name=\"startrun\" value=\"STOP\" %s>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" style=\"background-color:#035096; color: #ffffff;\" name=\"startrun\" value=\"FORCE RUN ONE\" %s><input type=\"submit\" style=\"background-color:#035096; color: #ffffff;\" name=\"startrun\" value=\"FORCE RUN TWO\" %s>", buf, buf );
 	  
-	 sprintf(cCountBuf, "<br>FlagLeft = %d<br>", flagLeft);
+
+	// create force run one and force run two buttons
+	 
+	 //
+	 if (webserverFlag == 0){
+	 sprintf(cCountBuf, "<br>FlagLeft = %d <br> Time Elapsed = %d sec", flagLeft, value);
+	 webserverFlag = 1;
+	 }
+	 else if (webserverFlag == 1){
+	 timer++;
+	 value = timer*2;
+	 sprintf(cCountBuf, "<br>FlagLeft = %d <br> Time Elapsed = %d sec <br> Time Elapsed = %d sec", flagLeft, value);
+	 }
+	 //}
+	// else{	 
+	//value = 0;
+	 //sprintf(cCountBuf, "<br>FlagLeft = %d <br> Time Elapsed = %d sec <br> Distance Traveled = %d cm", flagLeft, (int) value, webserverFlag);
+	 //}
+	 //sprintf(cCountBuf, "<br>Distance Traveled = %d cm", dataPtrSensor[3]);
+	 //sprintf(cCountBuf, "<br>Time Elapsed = %d sec",(int) value );
 
 	//<input type="submit" name = "startrun" value="Start">
 	strcat( uip_appdata, cCountBuf );

@@ -262,21 +262,20 @@ const unsigned long ulLEDNo = 3;
 		/* Turn LED's on or off in accordance with the check box status. */
 		if( strstr( c, "startrun=START" ) != NULL )
 		{ 	
-			//if (flag ==0){
-			/* Set LED7. */
-			//vParTestSetLED( ulLEDNo, pdFALSE );
+
 			SendsensorMacroOverride(MACROSTATE_FINDING_LINE);
-			//flag = 1;
-			//}
-			//else 
-			//{
-			 //vParTestSetLED( ulLEDNo, pdTRUE );
-			//SendsensorMacroOverride(MACROSTATE_FINISHED);
-			//flag = 0;
-			//}
+
 		}
 		else if ( strstr( c, "startrun=STOP" ) != NULL )  {
 		SendsensorMacroOverride(MACROSTATE_FINISHED);
+
+		}
+		else if ( strstr( c, "startrun=FORCE+RUN+ONE" ) != NULL )  {
+		SendsensorMacroOverride(MACROSTATE_RUN_ONE);
+
+		}
+		else if ( strstr( c, "startrun=FORCE+RUN+TWO" ) != NULL )  {
+		SendsensorMacroOverride(MACROSTATE_RUN_TWO);
 
 		}
 		/*
