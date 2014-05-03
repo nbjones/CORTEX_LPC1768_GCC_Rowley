@@ -289,11 +289,11 @@ static unsigned short generate_test_state( void *arg )
 	// create force run one and force run two buttons
 	 
 	 //
-	 if (webserverFlag == 0){
-	 sprintf(cCountBuf, "<br>FlagLeft = %d <br> Time Elapsed = %d sec", flagLeft, value);
-	 webserverFlag = 1;
-	 }
-	 else if (webserverFlag == 1){
+	 //if (webserverFlag == 0){
+	 //sprintf(cCountBuf, "<br>FlagLeft = %d <br> Time Elapsed = %d sec", flagLeft, value);
+	 //webserverFlag = 1;
+	 //}
+	 if (webserverFlag == 1){
 	 timer++;
 	 value = timer*2;
 	 sprintf(cCountBuf, "<br>FlagLeft = %d <br> Time Elapsed = %d sec <br> Time Elapsed = %d sec", flagLeft, value);
