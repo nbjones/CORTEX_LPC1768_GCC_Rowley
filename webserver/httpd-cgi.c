@@ -293,11 +293,11 @@ static unsigned short generate_test_state( void *arg )
 	 //sprintf(cCountBuf, "<br>FlagLeft = %d <br> Time Elapsed = %d sec", flagLeft, value);
 	 //webserverFlag = 1;
 	 //}
-	 if (webserverFlag == 1){
-	 timer++;
-	 value = timer*2;
-	 sprintf(cCountBuf, "<br>FlagLeft = %d <br> Time Elapsed = %d sec <br> Time Elapsed = %d sec", flagLeft, value);
-	 }
+
+	 //timer++;
+	 //value = timer*2;
+	 //sprintf(cCountBuf, "<br>FlagLeft = %d <br> Time Elapsed = %d sec <br> Time Elapsed = %d sec", flagLeft, value);
+	 
 	 //}
 	// else{	 
 	//value = 0;
@@ -307,7 +307,7 @@ static unsigned short generate_test_state( void *arg )
 	 //sprintf(cCountBuf, "<br>Time Elapsed = %d sec",(int) value );
 
 	//<input type="submit" name = "startrun" value="Start">
-	strcat( uip_appdata, cCountBuf );
+	//strcat( uip_appdata, cCountBuf );
 
 	return strlen( uip_appdata );
 	  /*
